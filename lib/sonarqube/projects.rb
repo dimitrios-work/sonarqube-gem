@@ -17,38 +17,102 @@
 module SonarQube
   module Projects
     class Projects
+      @@endpoint='/api/projects/'
+      
+      #Constructor
+      #
+      # @param [RestClient::Resource] connector The rest-client resource object
+      #
       def initialize connector
         @connector=connector
       end
       
-      #http://localhost:9000/api/projects/index
-      def list
-        JSON.parse(@connector['api/projects/index'].get)
+      #Returns all projects
+      #
+      # @return [JSON] A JSON object, containing all the projects.
+      #
+      def get
+        JSON.parse(@connector["#{@@endpoint}index?format=json"].get)
       end
     
-      #http://localhost:9000/api/projects/index?key=35
-      #http://localhost:9000/api/projects/index?key=java-sonar-runner-simple
+      #Search for a project using the project index number (id)
+      #
+      # @param [String] index project index number to use in the search
+      # @example puts \"this will return all the projects that their id is 47: #\\{search_by_key 47\}\"
+      # @return [JSON] A JSON object containing the project details (what details?).
+      def search_by_index index
+        JSON.parse(@connector["#{@@endpoint}index?key=#{index}"].get)
+      end
+   
+      #Search for a project using the project key
+      #
+      # @param [String] key project key to use in the search
+      # @example puts \"this will return all the projects that their key is \'my:awesome:project\': #\\{search_by_key 'my:awesome:project'\}\"
+      # @return [JSON] A JSON object containing the project details (what details?).
       def search_by_key key
-        JSON.parse(@connector['api/projects/index?key=' + key].get)
+        JSON.parse(@connector["#{@@endpoint}index?key=#{key}"].get)
       end
-    
-      #http://localhost:9000/api/projects/index?search=java
-      def search_by_name name
-        JSON.parse(@connector['api/projects/index?search=' + name].get)
+      
+      #Return all projects that their name contains the provided string
+      #
+      # @param [String] search_string search string to search with
+      # @return [JSON] A JSON object, containing all the project details (what details?).
+      # @example puts \"this will return all the projects that their name contains the string \'java\': #\\{name_contains 'java'\}\"
+      def name_contains search_string
+        JSON.parse(@connector["#{@@endpoint}index?search=#{search_string}"].get)
+      end
+      
+      #Delete a project with the specified id
+      #
+      # @param [String] id id of the project to be deleted
+      # @return [JSON] A JSON object, containing all the project details (what details?).
+      # @example puts \"this will delete the project with id 47: #\\{delete_id 47\}\"
+      def delete_id id
+        JSON.parse(@connector["#{@@endpoint}delete?id=#{id}"].get)
+      end
+      
+      #Delete a project with the specified key
+      #
+      # @param [String] key key of the project to be deleted
+      # @return [JSON] A JSON object, containing all the project details (what details?).
+      # @example puts \"this will delete the project with the key \'my:awesome:project\': #\\{delete_key 'my:awesome:project'\}\"
+      def delete_key key
+        JSON.parse(@connector["#{@@endpoint}delete?key=#{key}"].get)
       end
     end
     
-    #http://localhost:9000/api/projects/index
-    def list
-      'api/projects/index'
+    #Returns all projects (functional interface)
+    #
+    # @return A JSON object, containing all the projects.
+    #
+    def get
+      JSON.parse(@connector["#{@@endpoint}api/projects/index"].get)
     end
   
+    #Search for a project by key (functional interface)
+    #
+    # == Parameters:
+    # Project key
+    #
+    # == Returns:
+    # A JSON object containing the project details (what details?).
+    # 
+    # == Example endpoints:
     #http://localhost:9000/api/projects/index?key=35
-    #http://localhost:9000/api/projects/index?key=java-sonar-runner-simple  
+    #http://localhost:9000/api/projects/index?key=java-sonar-runner-simple
     def search_by_key key
       'api/projects/index?key=' + key
     end
 
+    #Search for a project by name
+    #
+    # == Parameters:
+    # Project name
+    #
+    # == Returns:
+    # A JSON object, containing all the project details (what details?).
+    # 
+    # == Example endpoints:
     #http://localhost:9000/api/projects/index?search=java
     def search_by_name name
       'api/projects/index?search=' + name

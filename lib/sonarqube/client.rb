@@ -18,14 +18,14 @@ module SonarQube
   module Client
     
     def connect(server_url, username='', password='')
-      RestClient::Resource.new(url, username, password)
+      RestClient::Resource.new(server_url, username, password)
     end
     
     def initialize(server_url, username='', password='')
-      if a+b==''
-        proc {|endpoint| RestClient::Resource.new baseurl+endpoint}.curry
+      if username + password == ''
+        proc {|endpoint| RestClient::Resource.new server_url+endpoint}.curry
       else
-        proc {|endpoint| RestClient::Resource.new baseurl+endpoint, a, b}.curry
+        proc {|endpoint| RestClient::Resource.new server_url+endpoint, a, b}.curry
       end
     end
   end

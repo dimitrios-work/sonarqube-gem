@@ -20,15 +20,18 @@ module SonarQube
 
     
     class TimeMachine
+      @@endpoint='api/timemachine/'
+      
       def initialize connector
         @connector=connector
       end
       
-      #example url:
-      #http://localhost:9000/api/timemachine/index?resource=java-sonar-runner-simple&metrics=lines,toDateTime=,fromDateTime=
-      def get project, metrics
-        JSON.parse(@connector['api/timemachine/index?resource=' + project +
-              '&metrics=' + metrics + ',toDateTime=,fromDateTime='].get)
+      #Returns the specified metrics of a project
+      #@param [String] project_name The name of the project
+      #@param [String] metrics A string that contains comma separated project metric keys/id's (can be found in: http://docs.sonarqube.org/display/SONAR/Metric+definitions)
+      #@return [JSON] A JSON object with the project metrics
+      def get project_name, metrics
+        JSON.parse(@connector["#{@@endpoint}index?format=json&resource=#{project_name}&metrics=#{metrics}&toDateTime=&fromDateTime="].get)
       end
     end
     
