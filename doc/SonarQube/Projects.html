@@ -79,7 +79,7 @@
   
   
     <dt class="r1 last">Defined in:</dt>
-    <dd class="r1 last">lib/sonarqube/projects.rb</dd>
+    <dd class="r1 last">lib/sonarqube-client/projects.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -234,12 +234,12 @@
       <pre class="lines">
 
 
-88
-89
-90</pre>
+91
+92
+93</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sonarqube/projects.rb', line 88</span>
+      <pre class="code"><span class="info file"># File 'lib/sonarqube-client/projects.rb', line 91</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get'>get</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='ivar'>@connector</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='cvar'>@@endpoint</span><span class='embexpr_end'>}</span><span class='tstring_content'>api/projects/index</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='rparen'>)</span>
@@ -290,12 +290,12 @@ href="http://localhost:9000/api/projects/index?key=java-sonar-runner-simple">loc
       <pre class="lines">
 
 
-103
-104
-105</pre>
+106
+107
+108</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sonarqube/projects.rb', line 103</span>
+      <pre class="code"><span class="info file"># File 'lib/sonarqube-client/projects.rb', line 106</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_by_key'>search_by_key</span> <span class='id identifier rubyid_key'>key</span>
   <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>api/projects/index?key=</span><span class='tstring_end'>&#39;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_key'>key</span>
@@ -344,12 +344,12 @@ href="http://localhost:9000/api/projects/index?search=java">localhost:9000/api/p
       <pre class="lines">
 
 
-117
-118
-119</pre>
+120
+121
+122</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sonarqube/projects.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'lib/sonarqube-client/projects.rb', line 120</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_by_name'>search_by_name</span> <span class='id identifier rubyid_name'>name</span>
   <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>api/projects/index?search=</span><span class='tstring_end'>&#39;</span></span> <span class='op'>+</span> <span class='id identifier rubyid_name'>name</span>
@@ -364,7 +364,7 @@ href="http://localhost:9000/api/projects/index?search=java">localhost:9000/api/p
 </div>
 
     <div id="footer">
-  Generated on Mon Jun 13 00:26:48 2016 by
+  Generated on Sun Jun 19 17:52:43 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.0).
 </div>

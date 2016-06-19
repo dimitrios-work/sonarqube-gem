@@ -16,6 +16,8 @@
 
 module SonarQube
   module Projects
+    require 'ostruct'
+    
     class Projects
       @@endpoint='/api/projects/'
       
@@ -29,37 +31,38 @@ module SonarQube
       
       #Returns all projects
       #
-      # @return [JSON] A JSON object, containing all the projects.
-      #
+      # @return [Array<OpenStruct>] An Array of OpenStruct objects containing the project details (e.g. [#<OpenStruct id="1", k="bad:project", nm="My bad project", sc="PRJ", qu="TRK">]).
       def get
-        JSON.parse(@connector["#{@@endpoint}index?format=json"].get)
+        response = JSON.parse(@connector["#{@@endpoint}index?format=json"].get, object_class: OpenStruct)
+        return response.length > 0 ? response : nil
       end
     
       #Search for a project using the project index number (id)
       #
       # @param [String] index project index number to use in the search
-      # @example puts \"this will return all the projects that their id is 47: #\\{search_by_key 47\}\"
-      # @return [JSON] A JSON object containing the project details (what details?).
+      # @example puts \"this will return the project with id 47: #\\{search_by_key 47\}\"
+      # @return [OpenStruct, nil] An OpenStruct object containing the project details (e.g. #<OpenStruct id="1", k="bad:project", nm="My bad project", sc="PRJ", qu="TRK">) or nil.
       def search_by_index index
-        JSON.parse(@connector["#{@@endpoint}index?key=#{index}"].get)
+        JSON.parse(@connector["#{@@endpoint}index?format=json&key=#{index}"].get, object_class: OpenStruct)[0]
       end
    
       #Search for a project using the project key
       #
       # @param [String] key project key to use in the search
-      # @example puts \"this will return all the projects that their key is \'my:awesome:project\': #\\{search_by_key 'my:awesome:project'\}\"
-      # @return [JSON] A JSON object containing the project details (what details?).
+      # @example puts \"this will return all the project with key \'my:awesome:project\': #\\{search_by_key 'my:awesome:project'\}\"
+      # @return [OpenStruct] An OpenStruct object containing the project details (e.g. #<OpenStruct id="1", k="bad:project", nm="My bad project", sc="PRJ", qu="TRK">) or nil.
       def search_by_key key
-        JSON.parse(@connector["#{@@endpoint}index?key=#{key}"].get)
+        JSON.parse(@connector["#{@@endpoint}index?format=json&key=#{key}"].get, object_class: OpenStruct)[0]
       end
       
       #Return all projects that their name contains the provided string
       #
       # @param [String] search_string search string to search with
-      # @return [JSON] A JSON object, containing all the project details (what details?).
       # @example puts \"this will return all the projects that their name contains the string \'java\': #\\{name_contains 'java'\}\"
+      # @return [Array<OpenStruct>, nil] An Array of OpenStruct objects containing the project details (e.g. [#<OpenStruct id="1", k="bad:project", nm="My bad project", sc="PRJ", qu="TRK">]) or nil.
       def name_contains search_string
-        JSON.parse(@connector["#{@@endpoint}index?search=#{search_string}"].get)
+        response = JSON.parse(@connector["#{@@endpoint}index?format=json&search=#{search_string}"].get, object_class: OpenStruct)
+        return response.length > 0 ? response : nil
       end
       
       #Delete a project with the specified id

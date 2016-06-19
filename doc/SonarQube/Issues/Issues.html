@@ -94,7 +94,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/sonarqube/issues.rb</dd>
+    <dd class="r2 last">lib/sonarqube-client/issues.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -403,7 +403,7 @@ days/time provided.</p>
 29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sonarqube/issues.rb', line 27</span>
+      <pre class="code"><span class="info file"># File 'lib/sonarqube-client/issues.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_connector'>connector</span>
   <span class='ivar'>@connector</span><span class='op'>=</span><span class='id identifier rubyid_connector'>connector</span>
@@ -508,7 +508,7 @@ add.</p>
 69</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sonarqube/issues.rb', line 67</span>
+      <pre class="code"><span class="info file"># File 'lib/sonarqube-client/issues.rb', line 67</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_add_comment'>add_comment</span> <span class='id identifier rubyid_key'>key</span><span class='comma'>,</span> <span class='id identifier rubyid_comment'>comment</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='ivar'>@connector</span><span class='lbracket'>[</span><span class='cvar'>@@endpoint</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>add_comment?format=json,issue=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='embexpr_end'>}</span><span class='tstring_content'>,text=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_comment'>comment</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='rparen'>)</span>
@@ -605,7 +605,7 @@ add.</p>
 79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sonarqube/issues.rb', line 77</span>
+      <pre class="code"><span class="info file"># File 'lib/sonarqube-client/issues.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_assign'>assign</span> <span class='id identifier rubyid_issue'>issue</span><span class='comma'>,</span> <span class='id identifier rubyid_username'>username</span><span class='op'>=</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_end'>&#39;</span></span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='ivar'>@connector</span><span class='lbracket'>[</span><span class='cvar'>@@endpoint</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>assign?issue=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_issue'>issue</span><span class='embexpr_end'>}</span><span class='tstring_content'>,assignee=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_username'>username</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='rparen'>)</span>
@@ -684,7 +684,7 @@ add.</p>
 98</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sonarqube/issues.rb', line 96</span>
+      <pre class="code"><span class="info file"># File 'lib/sonarqube-client/issues.rb', line 96</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_changelog'>changelog</span> <span class='id identifier rubyid_key'>key</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='ivar'>@connector</span><span class='lbracket'>[</span><span class='cvar'>@@endpoint</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>changelog?format=json,issue=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_key'>key</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='rparen'>)</span>
@@ -743,7 +743,7 @@ add.</p>
 106</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sonarqube/issues.rb', line 104</span>
+      <pre class="code"><span class="info file"># File 'lib/sonarqube-client/issues.rb', line 104</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get'>get</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='ivar'>@connector</span><span class='lbracket'>[</span><span class='cvar'>@@endpoint</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>search</span><span class='tstring_end'>&#39;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='rparen'>)</span>
@@ -825,7 +825,7 @@ user.email).</p>
 89</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sonarqube/issues.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/sonarqube-client/issues.rb', line 87</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get_committers'>get_committers</span> <span class='id identifier rubyid_search_string'>search_string</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='ivar'>@connector</span><span class='lbracket'>[</span><span class='cvar'>@@endpoint</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>authors?ps=2147483647&amp;q=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_search_string'>search_string</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='rparen'>)</span>
@@ -908,7 +908,7 @@ specified.</p>
 59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sonarqube/issues.rb', line 57</span>
+      <pre class="code"><span class="info file"># File 'lib/sonarqube-client/issues.rb', line 57</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_in_past'>in_past</span> <span class='id identifier rubyid_date'>date</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='ivar'>@connector</span><span class='lbracket'>[</span><span class='cvar'>@@endpoint</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>search?createdInLast=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_date'>date</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='rparen'>)</span>
@@ -988,7 +988,7 @@ specified.</p>
 48</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sonarqube/issues.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/sonarqube-client/issues.rb', line 46</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_older_than'>older_than</span> <span class='id identifier rubyid_date'>date</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='ivar'>@connector</span><span class='lbracket'>[</span><span class='cvar'>@@endpoint</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>search?createdBefore=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_date'>date</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='rparen'>)</span>
@@ -1067,7 +1067,7 @@ specified.</p>
 38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sonarqube/issues.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'lib/sonarqube-client/issues.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_search_by_name'>search_by_name</span> <span class='id identifier rubyid_names'>names</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='ivar'>@connector</span><span class='lbracket'>[</span><span class='cvar'>@@endpoint</span> <span class='op'>+</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>search?componentKeys=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_names'>names</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='rparen'>)</span>
@@ -1082,7 +1082,7 @@ specified.</p>
 </div>
 
     <div id="footer">
-  Generated on Mon Jun 13 00:26:48 2016 by
+  Generated on Sun Jun 19 17:52:43 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.0).
 </div>

@@ -20,12 +20,12 @@ require 'nokogiri'
 require 'json'
 require 'logger'
 
-require File.dirname(__FILE__) + '/sonarqube/client.rb'
-require File.dirname(__FILE__) + '/sonarqube/issues.rb'
-require File.dirname(__FILE__) + '/sonarqube/logger.rb'
-require File.dirname(__FILE__) + '/sonarqube/projects.rb'
-require File.dirname(__FILE__) + '/sonarqube/timemachine.rb'
-require File.dirname(__FILE__) + '/sonarqube/version.rb'
+require File.dirname(__FILE__) + '/sonarqube-client/client.rb'
+require File.dirname(__FILE__) + '/sonarqube-client/issues.rb'
+require File.dirname(__FILE__) + '/sonarqube-client/logger.rb'
+require File.dirname(__FILE__) + '/sonarqube-client/projects.rb'
+require File.dirname(__FILE__) + '/sonarqube-client/timemachine.rb'
+require File.dirname(__FILE__) + '/sonarqube-client/version.rb'
 
 
 

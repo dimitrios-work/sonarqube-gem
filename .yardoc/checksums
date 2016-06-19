@@ -1,8 +1,7 @@
-lib/sonarqube.rb f474a03ab85ee2cb91c8c9b0086449898732f3e4
-lib/sonarqube/client.rb bf974b95250b9cbe90bf5f21988e2edbabdca111
-lib/sonarqube/issues.rb 9c96f98655a9b2a6c5486af763407d03ed5d7750
-lib/sonarqube/logger.rb 3f4f8fb7a0db1409399e010cc0e7052dece57207
-lib/sonarqube-client.rb a531a082db8eead442b8d20dd5ad3d1babff9b62
-lib/sonarqube/version.rb 968a7ef3db6cd2d1cf0e96f6e943076838d5191a
-lib/sonarqube/projects.rb 83c3309956fd3e58d90043d1b8c669284c17a472
-lib/sonarqube/timemachine.rb 64f18f929b37fd36bc83615129769ecc614ecfa4
+lib/sonarqube-client.rb 3828e6f1021b724fcd3bdc277f10d6e6650a76fd
+lib/sonarqube-client/issues.rb 9c96f98655a9b2a6c5486af763407d03ed5d7750
+lib/sonarqube-client/logger.rb 3f4f8fb7a0db1409399e010cc0e7052dece57207
+lib/sonarqube-client/client.rb bf974b95250b9cbe90bf5f21988e2edbabdca111
+lib/sonarqube-client/version.rb 968a7ef3db6cd2d1cf0e96f6e943076838d5191a
+lib/sonarqube-client/projects.rb b747863d6c6221f4963e7a7e65b4190a56abcbc1
+lib/sonarqube-client/timemachine.rb 64f18f929b37fd36bc83615129769ecc614ecfa4

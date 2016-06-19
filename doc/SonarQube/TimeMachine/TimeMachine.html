@@ -94,7 +94,7 @@
   
   
     <dt class="r2 last">Defined in:</dt>
-    <dd class="r2 last">lib/sonarqube/timemachine.rb</dd>
+    <dd class="r2 last">lib/sonarqube-client/timemachine.rb</dd>
   
 </dl>
 <div class="clear"></div>
@@ -213,7 +213,7 @@
 27</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sonarqube/timemachine.rb', line 25</span>
+      <pre class="code"><span class="info file"># File 'lib/sonarqube-client/timemachine.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span> <span class='id identifier rubyid_connector'>connector</span>
   <span class='ivar'>@connector</span><span class='op'>=</span><span class='id identifier rubyid_connector'>connector</span>
@@ -317,7 +317,7 @@ href="http://docs.sonarqube.org/display/SONAR/Metric+definitions">docs.sonarqube
 35</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/sonarqube/timemachine.rb', line 33</span>
+      <pre class="code"><span class="info file"># File 'lib/sonarqube-client/timemachine.rb', line 33</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get'>get</span> <span class='id identifier rubyid_project_name'>project_name</span><span class='comma'>,</span> <span class='id identifier rubyid_metrics'>metrics</span>
   <span class='const'>JSON</span><span class='period'>.</span><span class='id identifier rubyid_parse'>parse</span><span class='lparen'>(</span><span class='ivar'>@connector</span><span class='lbracket'>[</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='embexpr_beg'>#{</span><span class='cvar'>@@endpoint</span><span class='embexpr_end'>}</span><span class='tstring_content'>index?format=json&amp;resource=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_project_name'>project_name</span><span class='embexpr_end'>}</span><span class='tstring_content'>&amp;metrics=</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_metrics'>metrics</span><span class='embexpr_end'>}</span><span class='tstring_content'>&amp;toDateTime=&amp;fromDateTime=</span><span class='tstring_end'>&quot;</span></span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_get'>get</span><span class='rparen'>)</span>
@@ -332,7 +332,7 @@ href="http://docs.sonarqube.org/display/SONAR/Metric+definitions">docs.sonarqube
 </div>
 
     <div id="footer">
-  Generated on Mon Jun 13 00:26:48 2016 by
+  Generated on Sun Jun 19 17:52:43 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.8.7.6 (ruby-2.3.0).
 </div>
