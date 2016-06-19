@@ -2,17 +2,17 @@
 This will grow up to be a sonarqube gem
 
 ## Table of Contents
- - [Using the gem](#usage)
+ - [Using the gem:](#usage)
  - [Setting up a dev environment for the gem](#gemdev)
  - 
  
-##Using the gem
- - [Installation](#installation)
- - [Return values](#retval)
+##Using the gem:
+ - [Installation:](#installation)
+ - [Return values](#return-values)
  - Usage (object oriented):
-   - [Creating a connection:](#createooconn)
-   - [Working with projects:](#workingwithooprojects)
-   - 
+   - [Creating a connection:](#creating-a-connection)
+   - [Working with projects:](#working-with-projects)
+   
    
 ###Installation:
 ```gem install 'sonarqube-client'```
