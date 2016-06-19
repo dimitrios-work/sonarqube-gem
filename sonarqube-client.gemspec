@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'sonarqube-client'
-  s.version     = '0.0.0'
+  s.version     = '0.0.1'
   s.date        = '2016-06-12'
   s.summary     = "A SonarQube client"
   s.description = "This gem can be used to interact with a SonarQube server using the REST API. This is an initial version and likely to be buggy and badly written. Testing/development is done against a sonarqube 5.2 server."
