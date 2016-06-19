@@ -9,10 +9,11 @@ This will grow up to be a sonarqube gem
 ##Using the gem:
  - [Installation:](#installation)
  - [Return values](#return-values)
- - Usage (object oriented):
+ - Usage:
    - [Creating a connection:](#creating-a-connection)
    - [Working with projects:](#working-with-projects)
-   
+ - Functional interface (nasty/prototype):
+   - [Functional interface](#functional-interface)
    
 ###Installation:
 ```gem install 'sonarqube-client'```
@@ -57,5 +58,29 @@ get projects using a part of their name
 => [#<OpenStruct id="1", k="bad:project", nm="My bad project", sc="PRJ", qu="TRK">, #<OpenStruct id="4", k="bad2:project", nm="My bad project no.2", sc="PRJ", qu="TRK">]
 ```
 
+###Functional interface
+```
+[2] pry(main)> require 'sonarqube-client'
+=> true
+[3] pry(main)> include SonarQube
+=> Object
+[4] pry(main)> include Projects
+=> Object
+[5] pry(main)> a=sonarqube('http://172.17.0.2:9000/', 'admin', 'admin')
+=> #<Proc:0x000000038d4020>
+[6] pry(main)> puts a.(get)
+
+{"id"=>"1", "k"=>"bad:project", "nm"=>"My bad project", "sc"=>"PRJ", "qu"=>"TRK"}
+{"id"=>"4", "k"=>"bad2:project", "nm"=>"My bad project no.2", "sc"=>"PRJ", "qu"=>"TRK"}
+=> nil
+[7] pry(main)> 
+[8] pry(main)> a.(get).each do |project|
+[8] pry(main)*   puts project['id']
+[8] pry(main)* end  
+1
+4
+=> [{"id"=>"1", "k"=>"bad:project", "nm"=>"My bad project", "sc"=>"PRJ", "qu"=>"TRK"}, {"id"=>"4", "k"=>"bad2:project", "nm"=>"My bad project no.2", "sc"=>"PRJ", "qu"=>"TRK"}]
+[9] pry(main)> 
+```
 ##Setting up a dev environment for the gem
 you'll need: java (e.g. be able to run ```java -version``` and get the version back and docker (docker daemon to be running and your dev account to be able to run docker commands (you can achieve this by adding your user to the docker group, e.g. (as root): ```usermod -aG docker my_username```
