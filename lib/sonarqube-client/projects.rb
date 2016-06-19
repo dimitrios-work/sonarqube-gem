@@ -89,7 +89,7 @@ module SonarQube
     # @return A JSON object, containing all the projects.
     #
     def get
-      JSON.parse(@connector["#{@@endpoint}api/projects/index"].get)
+      'api/projects/index?format=json'
     end
   
     #Search for a project by key (functional interface)
@@ -104,7 +104,7 @@ module SonarQube
     #http://localhost:9000/api/projects/index?key=35
     #http://localhost:9000/api/projects/index?key=java-sonar-runner-simple
     def search_by_key key
-      'api/projects/index?key=' + key
+      '/api/projects/index?key=' + key
     end
 
     #Search for a project by name

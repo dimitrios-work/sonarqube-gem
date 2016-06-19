@@ -75,9 +75,9 @@ module SonarQube
   
   def sonarqube(server_url, username='', password='')
     if [username, password].reduce(:+) == ''
-      proc {|endpoint| RestClient::Resource.new server_url + endpoint}.curry
+      proc {|endpoint| JSON.parse((RestClient::Resource.new server_url + endpoint).get)}.curry
     else
-      proc {|endpoint| RestClient::Resource.new server_url + endpoint, a, b}.curry
+      proc {|endpoint| JSON.parse((RestClient::Resource.new server_url + endpoint, username, password).get)}.curry
     end
   end
 
