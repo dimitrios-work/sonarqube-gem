@@ -22,6 +22,7 @@ require 'rake/clean'
 require 'rubygems/package_task'
 require 'rdoc/task'
 require 'rake/testtask'
+require 'rest-client'
 
 spec = Gem::Specification.new do |s|
   s.name = 'sonarqube_gem'
@@ -57,3 +58,43 @@ Rake::TestTask.new do |t|
   t.test_files = FileList['test/**/*.rb']
 end
 
+namespace :setup_dev_environment do
+
+  desc 'downloads the sonarqube docker image'
+  task :download_docker_box do
+    if `docker pull sonarqube:5.2` == 0
+      puts 'successfully downloaded the sonarqube:5.2 docker image'
+    else
+      puts 'failed to download the sonarqube:5.2 docker image'
+    end
+  end
+
+  desc 'downloads the sonarqube scanner'
+  task :download_scanner do
+    directory 'sonarqube_testing_server'
+    IO.write('./sonar-scanner-2.6.1.zip', RestClient.get('https://sonarsource.bintray.com/Distribution/sonar-scanner-cli/sonar-scanner-2.6.1.zip'))
+  end
+  
+  task :all  => [:download_docker_box, :download_scanner]
+end
+  
+desc 'stops/deletes the development environment'
+namespace :teardown_dev_environment do
+    
+  desc 'stops docker'  
+  task :stopping_sonarqube_dev_environment do
+    `docker ps | grep sonarqube`
+  end
+  
+  desc 'removes the development environment files'
+  task :remove_sonarqube_dev_environment do
+    if FileUtils.rm_rf 'sonarqube_test_server'
+      puts "successfully deleted the sonarqube_test_server folder"
+    else
+      puts "couldn't delete the sonarqube_test_server folder"
+    end
+  end
+end
+
+desc 'sets up the dev environment'
+task :setup_dev_env => 'setup_dev_environment:all'
