@@ -16,9 +16,11 @@
 
 module SonarQube
   module Projects
+    require 'ostruct'
+
     class Projects
       ENDPOINT='/api/projects/'
-      
+
       #Constructor
       #
       # @param [RestClient::Resource] connector The rest-client resource object
@@ -26,42 +28,45 @@ module SonarQube
       def initialize connector
         @connector=connector
       end
-      
+
       #Returns all projects
       #
-      # @return [JSON] A JSON object, containing all the projects.
-      #
+      # @return [Array<OpenStruct>] An Array of OpenStruct objects containing the project details (e.g. [#<OpenStruct id="1", k="bad:project", nm="My bad project", sc="PRJ", qu="TRK">]).
       def get
-        JSON.parse(@connector["#{ENDPOINT}index?format=json"].get)
+        response = JSON.parse(@connector["#{ENDPONT}index?format=json"].get, object_class: OpenStruct)
+        return response.length > 0 ? response : nil
       end
-    
+
       #Search for a project using the project index number (id)
       #
       # @param [String] index project index number to use in the search
-      # @example puts \"this will return all the projects that their id is 47: #\\{search_by_key 47\}\"
-      # @return [JSON] A JSON object containing the project details (what details?).
+      # @example puts \"this will return the project with id 47: #\\{search_by_key 47\}\"
+      # @return [OpenStruct, nil] An OpenStruct object containing the project details (e.g. #<OpenStruct id="1", k="bad:project", nm="My bad project", sc="PRJ", qu="TRK">) or nil.
       def search_by_index index
-        JSON.parse(@connector["#{ENDPOINT}index?key=#{index}"].get)
+        response = JSON.parse(@connector["#{ENDPONT}index?format=json&key=#{index}"].get, object_class: OpenStruct)[0]
+        return response.length > 0 ? response : nil
       end
-   
+
       #Search for a project using the project key
       #
       # @param [String] key project key to use in the search
-      # @example puts \"this will return all the projects that their key is \'my:awesome:project\': #\\{search_by_key 'my:awesome:project'\}\"
-      # @return [JSON] A JSON object containing the project details (what details?).
+      # @example puts \"this will return all the project with key \'my:awesome:project\': #\\{search_by_key 'my:awesome:project'\}\"
+      # @return [OpenStruct] An OpenStruct object containing the project details (e.g. #<OpenStruct id="1", k="bad:project", nm="My bad project", sc="PRJ", qu="TRK">) or nil.
       def search_by_key key
-        JSON.parse(@connector["#{ENDPOINT}index?key=#{key}"].get)
+        response = JSON.parse(@connector["#{ENDPONT}index?format=json&key=#{key}"].get, object_class: OpenStruct)[0]
+        return response.length > 0 ? response : nil
       end
-      
+
       #Return all projects that their name contains the provided string
       #
       # @param [String] search_string search string to search with
-      # @return [JSON] A JSON object, containing all the project details (what details?).
       # @example puts \"this will return all the projects that their name contains the string \'java\': #\\{name_contains 'java'\}\"
+      # @return [Array<OpenStruct>, nil] An Array of OpenStruct objects containing the project details (e.g. [#<OpenStruct id="1", k="bad:project", nm="My bad project", sc="PRJ", qu="TRK">]) or nil.
       def name_contains search_string
-        JSON.parse(@connector["#{ENDPOINT}index?search=#{search_string}"].get)
+        response = JSON.parse(@connector["#{ENDPONT}index?format=json&search=#{search_string}"].get, object_class: OpenStruct)
+        return response.length > 0 ? response : nil
       end
-      
+
       #Delete a project with the specified id
       #
       # @param [String] id id of the project to be deleted
@@ -70,7 +75,7 @@ module SonarQube
       def delete_id id
         JSON.parse(@connector["#{ENDPOINT}delete?id=#{id}"].get)
       end
-      
+
       #Delete a project with the specified key
       #
       # @param [String] key key of the project to be deleted
@@ -80,15 +85,15 @@ module SonarQube
         JSON.parse(@connector["#{ENDPOINT}delete?key=#{key}"].get)
       end
     end
-    
+
     #Returns all projects (functional interface)
     #
     # @return A JSON object, containing all the projects.
     #
     def get
-      JSON.parse(@connector["#{ENDPOINT}api/projects/index"].get)
+      'api/projects/index?format=json'
     end
-  
+
     #Search for a project by key (functional interface)
     #
     # == Parameters:
@@ -96,12 +101,12 @@ module SonarQube
     #
     # == Returns:
     # A JSON object containing the project details (what details?).
-    # 
+    #
     # == Example endpoints:
     #http://localhost:9000/api/projects/index?key=35
     #http://localhost:9000/api/projects/index?key=java-sonar-runner-simple
     def search_by_key key
-      'api/projects/index?key=' + key
+      '/api/projects/index?key=' + key
     end
 
     #Search for a project by name
@@ -111,7 +116,7 @@ module SonarQube
     #
     # == Returns:
     # A JSON object, containing all the project details (what details?).
-    # 
+    #
     # == Example endpoints:
     #http://localhost:9000/api/projects/index?search=java
     def search_by_name name

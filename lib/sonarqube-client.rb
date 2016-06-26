@@ -20,12 +20,12 @@ require 'nokogiri'
 require 'json'
 require 'logger'
 
-require File.dirname(__FILE__) + '/sonarqube/client.rb'
-require File.dirname(__FILE__) + '/sonarqube/issues.rb'
-require File.dirname(__FILE__) + '/sonarqube/logger.rb'
-require File.dirname(__FILE__) + '/sonarqube/projects.rb'
-require File.dirname(__FILE__) + '/sonarqube/timemachine.rb'
-require File.dirname(__FILE__) + '/sonarqube/version.rb'
+require File.dirname(__FILE__) + '/sonarqube-client/client.rb'
+require File.dirname(__FILE__) + '/sonarqube-client/issues.rb'
+require File.dirname(__FILE__) + '/sonarqube-client/logger.rb'
+require File.dirname(__FILE__) + '/sonarqube-client/projects.rb'
+require File.dirname(__FILE__) + '/sonarqube-client/timemachine.rb'
+require File.dirname(__FILE__) + '/sonarqube-client/version.rb'
 
 
 
@@ -44,53 +44,53 @@ module SonarQube
   class SonarQube
     def initialize server_url, username='', password=''
       if [username, password].reduce(:+) == ''
-        @connector=RestClient::Resource.new(server_url)      
+        @connector=RestClient::Resource.new(server_url)
       else
-        @connector=RestClient::Resource.new(server_url, username, password)      
+        @connector=RestClient::Resource.new(server_url, username, password)
       end
     end
-    
+
     #Returns a timemachine object, can also be used to invoke timemachine methods without having to store an object
     # @example my_tm = SonarQube.timemachine
-    #   or if we don't want a persistent object: 
+    #   or if we don't want a persistent object:
     # @example puts \"coverage for my project is: \#\\{SonarQube.timemachine.get(my_awesome_project, coverage)\}\"
     # @return [TimeMachine::TimeMachine]
     def timemachine
       TimeMachine::TimeMachine.new(@connector)
     end
-    
+
     #Returns a projects object, can also be used to invoke projects methods without having to store an object
     # @example my_proj = SonarQube.projects
-    #   or if we don't want a persistent object: 
+    #   or if we don't want a persistent object:
     # @example puts \"available projects are: \#\\{SonarQube.projects.list\}\"
     # @return [TimeMachine::TimeMachine]
     def projects
       Projects::Projects.new(@connector)
     end
-    
+
     #Returns an issues object, can also be used to invoke issues methods without having to store an object
     # @example issues = SonarQube.issues
-    #   or if we don't want a persistent object: 
+    #   or if we don't want a persistent object:
     # @example puts \"the list with all the issues is: \#\\{SonarQube.issues.get\}\"
     # @return [TimeMachine::TimeMachine]
     def issues
       Issues::Issues.new(@connector)
     end
   end
-  
+
   #Functional interface for this gem. Creates a curried proc, which can be called using other
   #functional style methods as parameters.
   #The returned curried Proc initialises/contains a RestClient::Resource object with all the necessary connectivity information
   # @example sq = SonarQube.sonarqube 'http://localhost:9000', 'admin', 'admin'
   # @return [Proc]
   def self.sonarqube(server_url, username='', password='')
-    
+
     if [username, password].reduce(:+) == ''
       connector = RestClient::Resource.new server_url
     else
       connector = RestClient::Resource.new server_url, username, password
     end
-    
+
     proc {|endpoint| connector[endpoint].get}.curry
   end
 
