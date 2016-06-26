@@ -1,0 +1,7 @@
+lib/sonarqube-client.rb bfb53f6e91e3bc238cbc17b4022ec146b72eddc5
+lib/sonarqube-client/client.rb bf974b95250b9cbe90bf5f21988e2edbabdca111
+lib/sonarqube-client/issues.rb 8ff721c75131b651abb8c2dbf385d58e9ac691ea
+lib/sonarqube-client/logger.rb 3f4f8fb7a0db1409399e010cc0e7052dece57207
+lib/sonarqube-client/version.rb 968a7ef3db6cd2d1cf0e96f6e943076838d5191a
+lib/sonarqube-client/projects.rb ca383b0333c1f38e8b01bc3899a85ffee8765e80
+lib/sonarqube-client/timemachine.rb 06733f74cf43f9a2d3b68ea6001403220a31a75f
