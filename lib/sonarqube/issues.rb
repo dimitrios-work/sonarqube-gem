@@ -18,7 +18,7 @@ module SonarQube
   module Issues
 
     class Issues 
-      @@endpoint='api/issues/'
+      ENDPOINT='api/issues/'
       
       #Constructor
       #
@@ -34,7 +34,7 @@ module SonarQube
       # @return A JSON object, containing all the issues found.
       #
       def search_by_name names
-        JSON.parse(@connector[@@endpoint + "search?componentKeys=#{names}"].get)
+        JSON.parse(@connector[ENDPOINT + "search?componentKeys=#{names}"].get)
       end
       
       #Search for issues older than a date/datetime
@@ -44,7 +44,7 @@ module SonarQube
       # @return A JSON object, containing all the issues created after the given date.
       #
       def older_than date
-        JSON.parse(@connector[@@endpoint + "search?createdBefore=#{date}"].get)
+        JSON.parse(@connector[ENDPOINT + "search?createdBefore=#{date}"].get)
       end
       
       #Returns all issues created between the current date/time and the amount of days/time provided
@@ -55,7 +55,7 @@ module SonarQube
       # @return [JSON] A JSON object, containing all the issues created in the previous time/days specified.
       #
       def in_past date
-        JSON.parse(@connector[@@endpoint + "search?createdInLast=#{date}"].get)
+        JSON.parse(@connector[ENDPOINT + "search?createdInLast=#{date}"].get)
       end
       
       #Add a comment to an issue
@@ -65,7 +65,7 @@ module SonarQube
       # @return [JSON] A JSON object, containing all the issues.
       #
       def add_comment key, comment=''
-        JSON.parse(@connector[@@endpoint + "add_comment?format=json,issue=#{key},text=#{comment}"].get)
+        JSON.parse(@connector[ENDPOINT + "add_comment?format=json,issue=#{key},text=#{comment}"].get)
       end
       
       #Assigns an issue to a user
@@ -75,7 +75,7 @@ module SonarQube
       # @return [A JSON object, containing all the issues.
       #
       def assign issue, username=''
-        JSON.parse(@connector[@@endpoint + "assign?issue=#{issue},assignee=#{username}"].get)
+        JSON.parse(@connector[ENDPOINT + "assign?issue=#{issue},assignee=#{username}"].get)
       end
       
       #Returns scm users (usernames or emails) that have authored code with issues
@@ -85,7 +85,7 @@ module SonarQube
       # @return [JSON] A JSON object, containing all the authors.
       #
       def get_committers search_string
-        JSON.parse(@connector[@@endpoint + "authors?ps=2147483647&q=#{search_string}"].get)
+        JSON.parse(@connector[ENDPOINT + "authors?ps=2147483647&q=#{search_string}"].get)
       end
       
       #Returns the changelog of an issue
@@ -94,7 +94,7 @@ module SonarQube
       # @return [JSON] A JSON object, containing all the changelog.
       #
       def changelog key
-        JSON.parse(@connector[@@endpoint + "changelog?format=json,issue=#{key}"].get)
+        JSON.parse(@connector[ENDPOINT + "changelog?format=json,issue=#{key}"].get)
       end
 
       #Returns all issues
@@ -102,7 +102,7 @@ module SonarQube
       # @return [JSON] A JSON object, containing all the issues.
       #
       def get
-        JSON.parse(@connector[@@endpoint + 'search'].get)
+        JSON.parse(@connector[ENDPOINT + 'search'].get)
       end
       
       def search_by_name names

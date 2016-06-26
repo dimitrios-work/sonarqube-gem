@@ -20,7 +20,7 @@ module SonarQube
 
     
     class TimeMachine
-      @@endpoint='api/timemachine/'
+      ENDPOINT='api/timemachine/'
       
       def initialize connector
         @connector=connector
@@ -31,7 +31,7 @@ module SonarQube
       #@param [String] metrics A string that contains comma separated project metric keys/id's (can be found in: http://docs.sonarqube.org/display/SONAR/Metric+definitions)
       #@return [JSON] A JSON object with the project metrics
       def get project_name, metrics
-        JSON.parse(@connector["#{@@endpoint}index?format=json&resource=#{project_name}&metrics=#{metrics}&toDateTime=&fromDateTime="].get)
+        JSON.parse(@connector["#{ENDPOINT}index?format=json&resource=#{project_name}&metrics=#{metrics}&toDateTime=&fromDateTime="].get)
       end
     end
     

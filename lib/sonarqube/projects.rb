@@ -17,7 +17,7 @@
 module SonarQube
   module Projects
     class Projects
-      @@endpoint='/api/projects/'
+      ENDPOINT='/api/projects/'
       
       #Constructor
       #
@@ -32,7 +32,7 @@ module SonarQube
       # @return [JSON] A JSON object, containing all the projects.
       #
       def get
-        JSON.parse(@connector["#{@@endpoint}index?format=json"].get)
+        JSON.parse(@connector["#{ENDPOINT}index?format=json"].get)
       end
     
       #Search for a project using the project index number (id)
@@ -41,7 +41,7 @@ module SonarQube
       # @example puts \"this will return all the projects that their id is 47: #\\{search_by_key 47\}\"
       # @return [JSON] A JSON object containing the project details (what details?).
       def search_by_index index
-        JSON.parse(@connector["#{@@endpoint}index?key=#{index}"].get)
+        JSON.parse(@connector["#{ENDPOINT}index?key=#{index}"].get)
       end
    
       #Search for a project using the project key
@@ -50,7 +50,7 @@ module SonarQube
       # @example puts \"this will return all the projects that their key is \'my:awesome:project\': #\\{search_by_key 'my:awesome:project'\}\"
       # @return [JSON] A JSON object containing the project details (what details?).
       def search_by_key key
-        JSON.parse(@connector["#{@@endpoint}index?key=#{key}"].get)
+        JSON.parse(@connector["#{ENDPOINT}index?key=#{key}"].get)
       end
       
       #Return all projects that their name contains the provided string
@@ -59,7 +59,7 @@ module SonarQube
       # @return [JSON] A JSON object, containing all the project details (what details?).
       # @example puts \"this will return all the projects that their name contains the string \'java\': #\\{name_contains 'java'\}\"
       def name_contains search_string
-        JSON.parse(@connector["#{@@endpoint}index?search=#{search_string}"].get)
+        JSON.parse(@connector["#{ENDPOINT}index?search=#{search_string}"].get)
       end
       
       #Delete a project with the specified id
@@ -68,7 +68,7 @@ module SonarQube
       # @return [JSON] A JSON object, containing all the project details (what details?).
       # @example puts \"this will delete the project with id 47: #\\{delete_id 47\}\"
       def delete_id id
-        JSON.parse(@connector["#{@@endpoint}delete?id=#{id}"].get)
+        JSON.parse(@connector["#{ENDPOINT}delete?id=#{id}"].get)
       end
       
       #Delete a project with the specified key
@@ -77,7 +77,7 @@ module SonarQube
       # @return [JSON] A JSON object, containing all the project details (what details?).
       # @example puts \"this will delete the project with the key \'my:awesome:project\': #\\{delete_key 'my:awesome:project'\}\"
       def delete_key key
-        JSON.parse(@connector["#{@@endpoint}delete?key=#{key}"].get)
+        JSON.parse(@connector["#{ENDPOINT}delete?key=#{key}"].get)
       end
     end
     
@@ -86,7 +86,7 @@ module SonarQube
     # @return A JSON object, containing all the projects.
     #
     def get
-      JSON.parse(@connector["#{@@endpoint}api/projects/index"].get)
+      JSON.parse(@connector["#{ENDPOINT}api/projects/index"].get)
     end
   
     #Search for a project by key (functional interface)

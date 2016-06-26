@@ -35,7 +35,12 @@ module SonarQube
 
   #@@logger=SonarQube::Logger::Logger.new
 
-
+  #Initializes a connector object (RestClient::Resource), that stores the url and optionally the username
+  #and password for the SonarQube server.
+  # @example sq = SonarQube.new 'http://localhost:9000', 'username', 'password'
+  # @param [String] server_url the url of the sonarqube server
+  # @param [String] username (optional) username
+  # @param [String] password (optional) password
   class SonarQube
     def initialize server_url, username='', password=''
       if [username, password].reduce(:+) == ''
@@ -45,7 +50,7 @@ module SonarQube
       end
     end
     
-    #Returns a timemachine object, can also be used to invoke timemachine methods without having to explicitly initialize/store an object
+    #Returns a timemachine object, can also be used to invoke timemachine methods without having to store an object
     # @example my_tm = SonarQube.timemachine
     #   or if we don't want a persistent object: 
     # @example puts \"coverage for my project is: \#\\{SonarQube.timemachine.get(my_awesome_project, coverage)\}\"
@@ -54,7 +59,7 @@ module SonarQube
       TimeMachine::TimeMachine.new(@connector)
     end
     
-    #Returns a projects object, can also be used to invoke projects methods without having to explicitly initialize/store an object
+    #Returns a projects object, can also be used to invoke projects methods without having to store an object
     # @example my_proj = SonarQube.projects
     #   or if we don't want a persistent object: 
     # @example puts \"available projects are: \#\\{SonarQube.projects.list\}\"
@@ -63,7 +68,7 @@ module SonarQube
       Projects::Projects.new(@connector)
     end
     
-    #Returns an issues object, can also be used to invoke issues methods without having to explicitly initialize/store an object
+    #Returns an issues object, can also be used to invoke issues methods without having to store an object
     # @example issues = SonarQube.issues
     #   or if we don't want a persistent object: 
     # @example puts \"the list with all the issues is: \#\\{SonarQube.issues.get\}\"
@@ -73,12 +78,20 @@ module SonarQube
     end
   end
   
-  def sonarqube(server_url, username='', password='')
+  #Functional interface for this gem. Creates a curried proc, which can be called using other
+  #functional style methods as parameters.
+  #The returned curried Proc initialises/contains a RestClient::Resource object with all the necessary connectivity information
+  # @example sq = SonarQube.sonarqube 'http://localhost:9000', 'admin', 'admin'
+  # @return [Proc]
+  def self.sonarqube(server_url, username='', password='')
+    
     if [username, password].reduce(:+) == ''
-      proc {|endpoint| RestClient::Resource.new server_url + endpoint}.curry
+      connector = RestClient::Resource.new server_url
     else
-      proc {|endpoint| RestClient::Resource.new server_url + endpoint, a, b}.curry
+      connector = RestClient::Resource.new server_url, username, password
     end
+    
+    proc {|endpoint| connector[endpoint].get}.curry
   end
 
 end
