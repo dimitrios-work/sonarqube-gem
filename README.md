@@ -12,7 +12,7 @@ This will grow up to be a sonarqube gem
  - Usage:
    - [Creating a connection:](#creating-a-connection)
    - [Working with projects:](#working-with-projects)
- - Functional interface (nasty/prototype):
+ - Functional interface (prototype/beta):
    - [Functional interface](#functional-interface)
    
 ###Installation:
@@ -62,19 +62,15 @@ get projects using a part of their name
 ```
 [2] pry(main)> require 'sonarqube-client'
 => true
-[3] pry(main)> include SonarQube
-=> Object
-[4] pry(main)> include Projects
-=> Object
-[5] pry(main)> a=sonarqube('http://172.17.0.2:9000/', 'admin', 'admin')
+[5] pry(main)> sc=SonarQube.sonarqube 'http://172.17.0.2:9000/', 'admin', 'admin'
 => #<Proc:0x000000038d4020>
-[6] pry(main)> puts a.(get)
+[6] pry(main)> puts sc.(Projects.get)
 
 {"id"=>"1", "k"=>"bad:project", "nm"=>"My bad project", "sc"=>"PRJ", "qu"=>"TRK"}
 {"id"=>"4", "k"=>"bad2:project", "nm"=>"My bad project no.2", "sc"=>"PRJ", "qu"=>"TRK"}
 => nil
 [7] pry(main)> 
-[8] pry(main)> a.(get).each do |project|
+[8] pry(main)> sc.(Projects.get).each do |project|
 [8] pry(main)*   puts project['id']
 [8] pry(main)* end  
 1
