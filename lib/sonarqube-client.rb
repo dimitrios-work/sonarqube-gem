@@ -24,6 +24,7 @@ require File.dirname(__FILE__) + '/sonarqube-client/client.rb'
 require File.dirname(__FILE__) + '/sonarqube-client/issues.rb'
 require File.dirname(__FILE__) + '/sonarqube-client/logger.rb'
 require File.dirname(__FILE__) + '/sonarqube-client/projects.rb'
+require File.dirname(__FILE__) + '/sonarqube-client/qualitygates.rb'
 require File.dirname(__FILE__) + '/sonarqube-client/timemachine.rb'
 require File.dirname(__FILE__) + '/sonarqube-client/version.rb'
 
@@ -62,10 +63,19 @@ module SonarQube
     #Returns a projects object, can also be used to invoke projects methods without having to store an object
     # @example my_proj = SonarQube.projects
     #   or if we don't want a persistent object:
-    # @example puts \"available projects are: \#\\{SonarQube.projects.list\}\"
-    # @return [TimeMachine::TimeMachine]
+    # @example puts \"available projects are: \#\\{SonarQube.projects.get\}\"
+    # @return [Projects::Projects]
     def projects
       Projects::Projects.new(@connector)
+    end
+
+    #Returns a qualitygates object, can also be used to invoke qualitygates methods without having to store an object
+    # @example my_qualitygates = SonarQube.qualitygates
+    #   or if we don't want a persistent object:
+    # @example puts \"available qualitygates are: \#\\{SonarQube.projects.get\}\"
+    # @return [QualityGates::QualityGates]
+    def qualitygates
+      QualityGates::QualityGates.new(@connector)
     end
 
     #Returns an issues object, can also be used to invoke issues methods without having to store an object
