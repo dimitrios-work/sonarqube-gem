@@ -33,7 +33,7 @@ module SonarQube
       #
       # @return [Array<OpenStruct>] An Array of OpenStruct objects containing the project details (e.g. [#<OpenStruct id="1", k="bad:project", nm="My bad project", sc="PRJ", qu="TRK">]).
       def get
-        response = JSON.parse(@connector["#{ENDPONT}index?format=json"].get, object_class: OpenStruct)
+        response = JSON.parse(@connector["#{ENDPOINT}index?format=json"].get, object_class: OpenStruct)
         return response.length > 0 ? response : nil
       end
 
@@ -43,7 +43,7 @@ module SonarQube
       # @example puts \"this will return the project with id 47: #\\{search_by_key 47\}\"
       # @return [OpenStruct, nil] An OpenStruct object containing the project details (e.g. #<OpenStruct id="1", k="bad:project", nm="My bad project", sc="PRJ", qu="TRK">) or nil.
       def search_by_index index
-        response = JSON.parse(@connector["#{ENDPONT}index?format=json&key=#{index}"].get, object_class: OpenStruct)[0]
+        response = JSON.parse(@connector["#{ENDPOINT}index?format=json&key=#{index}"].get, object_class: OpenStruct)[0]
         return response.length > 0 ? response : nil
       end
 
@@ -53,7 +53,7 @@ module SonarQube
       # @example puts \"this will return all the project with key \'my:awesome:project\': #\\{search_by_key 'my:awesome:project'\}\"
       # @return [OpenStruct] An OpenStruct object containing the project details (e.g. #<OpenStruct id="1", k="bad:project", nm="My bad project", sc="PRJ", qu="TRK">) or nil.
       def search_by_key key
-        response = JSON.parse(@connector["#{ENDPONT}index?format=json&key=#{key}"].get, object_class: OpenStruct)[0]
+        response = JSON.parse(@connector["#{ENDPOINT}index?format=json&key=#{key}"].get, object_class: OpenStruct)[0]
         return response.length > 0 ? response : nil
       end
 
@@ -63,7 +63,7 @@ module SonarQube
       # @example puts \"this will return all the projects that their name contains the string \'java\': #\\{name_contains 'java'\}\"
       # @return [Array<OpenStruct>, nil] An Array of OpenStruct objects containing the project details (e.g. [#<OpenStruct id="1", k="bad:project", nm="My bad project", sc="PRJ", qu="TRK">]) or nil.
       def name_contains search_string
-        response = JSON.parse(@connector["#{ENDPONT}index?format=json&search=#{search_string}"].get, object_class: OpenStruct)
+        response = JSON.parse(@connector["#{ENDPOINT}index?format=json&search=#{search_string}"].get, object_class: OpenStruct)
         return response.length > 0 ? response : nil
       end
 

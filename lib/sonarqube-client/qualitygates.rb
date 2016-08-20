@@ -33,14 +33,14 @@ module SonarQube
       #
       # @return [Array<OpenStruct>] An Array of OpenStruct objects containing the qualitygate details.
       def get
-        JSON.parse(@connector["#{ENDPONT}list"].get, object_class: OpenStruct)
+        JSON.parse(@connector["#{ENDPOINT}list"].get, object_class: OpenStruct)
       end
     
       #Returns the project_status details
       #
       # @return [Array<OpenStruct>] An Array of OpenStruct objects containing the project_status.
       def project_status projectKey
-        JSON.parse(@connector["#{ENDPONT}project_status?projectKey=#{projectKey}"].get, object_class: OpenStruct)
+        JSON.parse(@connector["#{ENDPOINT}project_status?projectKey=#{projectKey}"].get, object_class: OpenStruct)
       end
 
     end
