@@ -72,4 +72,8 @@ found a project who's name contains the keyword 'bad': My bad project no.2
 ```
 
 ###Setting up a dev environment for the gem
-you'll need: java (e.g. be able to run ```java -version``` and get the version back and docker (docker daemon to be running and your dev account to be able to run docker commands (you can achieve this by adding your user to the docker group, e.g. (as root): ```usermod -aG docker my_username```
+you'll need: 
+  - java (e.g. be able to run ```java -version``` and get the version back)
+  - docker
+    - docker daemon to be running 
+    - your dev account to be able to run docker commands (you can achieve this by adding your user to the docker group, one way to do this is by running: ```sudo usermod -aG docker my_username```)
