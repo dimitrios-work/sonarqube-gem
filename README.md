@@ -2,7 +2,7 @@
 This will grow up to be a sonarqube gem
 
 ## Table of Contents
- - [Using the gem:](#using-the-gem)
+ - [Using the gem](#using-the-gem)
  - [Setting up a dev environment for the gem](#setting-up-a-dev-environment-for-the-gem)
  
 ###Using the gem:
