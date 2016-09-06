@@ -7,10 +7,10 @@ This will grow up to be a sonarqube gem
  
 ###Using the gem:
  - I'm using YARD for documentation, the YARD documentation for the latest released version is [here](http://www.rubydoc.info/gems/sonarqube-client), the following is only a quick how-to
- - [Installation:](#installation)
+ - [Installation](#installation)
  - Usage:
-   - [Creating a connection:](#creating-a-connection)
-   - [Working with projects:](#working-with-projects)
+   - [Creating a connection](#creating-a-connection)
+   - [Working with projects](#working-with-projects)
  - Functional interface (prototype/beta):
    - [Functional interface](#functional-interface)
  - [Return values](#return-values)
