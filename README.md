@@ -6,7 +6,7 @@ This will grow up to be a sonarqube gem
  - [Setting up a dev environment for the gem](#setting-up-a-dev-environment-for-the-gem)
  
 ###Using the gem:
- - I'm using YARD for documentation, the YARDdoc for the latest released version is [here](http://www.rubydoc.info/gems/sonarqube-client), the following is only a quick how-to
+ - I'm using YARD for documentation, the YARD documentation for the latest released version is [here](http://www.rubydoc.info/gems/sonarqube-client), the following is only a quick how-to
  - [Installation:](#installation)
  - Usage:
    - [Creating a connection:](#creating-a-connection)
