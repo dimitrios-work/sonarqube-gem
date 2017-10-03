@@ -27,6 +27,7 @@ require File.dirname(__FILE__) + '/sonarqube-client/projects.rb'
 require File.dirname(__FILE__) + '/sonarqube-client/qualitygates.rb'
 require File.dirname(__FILE__) + '/sonarqube-client/timemachine.rb'
 require File.dirname(__FILE__) + '/sonarqube-client/version.rb'
+require File.dirname(__FILE__) + '/sonarqube-client/compute_engine.rb'
 
 
 
@@ -85,6 +86,14 @@ module SonarQube
     # @return [TimeMachine::TimeMachine]
     def issues
       Issues::Issues.new(@connector)
+    end
+
+    #Returns a ComputeEngine object, can also be used to invoke ce methods without having to store an object
+    # @example ce = SonarQube.ce
+    #   or if we don't want a persistent object:
+    # @return [ComputeEngine::ComputeEngine]
+    def ce
+      ComputeEngine::ComputeEngine.new(@connector)
     end
   end
 
