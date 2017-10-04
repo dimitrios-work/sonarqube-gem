@@ -38,7 +38,7 @@ module SonarQube
       #     - q : Limit search
       #     - status : Comma separated list of task statuses
       #     - type : Task type [e.g. REPORT]
-      def activity(options)
+      def activity(**options)
         JSON.parse(@connector[ENDPOINT + "activity?#{options.to_a.map {|p| "#{p[0]}=#{p[1]}" }.join('&')}"].get)
       end
 
