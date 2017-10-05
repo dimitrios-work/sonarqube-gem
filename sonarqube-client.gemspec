@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'sonarqube-client'
-  s.version     = '0.0.1'
-  s.date        = '2016-06-12'
+  s.version     = '0.0.2'
+  s.date        = '2017-10-03'
   s.summary     = "A SonarQube client"
   s.description = "This gem can be used to interact with a SonarQube server using the REST API. This is an initial version and likely to be buggy and badly written. Testing/development is done against a sonarqube 5.2 server."
   s.authors     = ["Dimitrios Dimas"]
@@ -12,7 +12,8 @@ Gem::Specification.new do |s|
     "lib/sonarqube-client/version.rb",
     "lib/sonarqube-client/logger.rb",
     "lib/sonarqube-client/projects.rb",
-    "lib/sonarqube-client/issues.rb"
+    "lib/sonarqube-client/issues.rb",
+    "lib/sonarqube-client/compute_engine.rb"
   ]
   s.homepage = 'http://rubygems.org/gems/sonarqube-client'
   s.license = 'GPL-2.0'
